@@ -35,7 +35,7 @@ The following software has been used:
 * multi format: Since it uses mpd, the player supports  Ogg Vorbis, FLAC, OggFLAC, MP2, MP3, MP4/AAC, MOD, Musepack and wave
   
 If you like to build your own one button audio book player, here are the super simple schematics:
-!(tobabp_schematics.jpg)  
+![](tobabp_schematics.jpg)  
   
 You can read more about it on https://clemens.name/the-one-button-audiobook-player/
 
