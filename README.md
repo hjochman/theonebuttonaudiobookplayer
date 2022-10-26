@@ -35,6 +35,71 @@ The following software has been used:
 * multi format: Since it uses mpd, the player supports  Ogg Vorbis, FLAC, OggFLAC, MP2, MP3, MP4/AAC, MOD, Musepack and wave
   
 If you like to build your own one button audio book player, here are the super simple schematics:
-http://blogs.fsfe.org/clemens/files/2012/10/obabp_schematics.jpg  
+!(tobabp_schematics.jpg)  
   
-You can read more about it on http://blogs.fsfe.org/clemens/2012/10/30/the-one-button-audiobook-player/  
+You can read more about it on https://clemens.name/the-one-button-audiobook-player/
+
+Update (2013-11-26)
+
+Here’s what Russel wrote in a comment to this post:
+
+```
+I just completed building this and have some addendum notes adding more details:
+Install the following packages:
+sudo apt-get install mpd
+sudo apt-get install mpc
+sudo apt-get install python-mpd
+sudo apt-get install python-pyudev
+
+(below assumes using defaults for /etc/mpd.conf)
+sudo mkdir -p /music/usb
+sudo ln -s /var/lib/mpd /music/mpd
+sudo ln -s /var/lib/mpd/music /music/mp3
+
+Copy the tobabp.py script to /home/pi
+nano /home/pi/tobabp.py
+  
+Change these in the script or flip the connections in wiring diagram.
+BUTTON = 17
+LED = 24
+
+Testing
+
+Rename a USB stick to “1GB”
+Copy 1 MP3 onto the stick
+
+Insert the stick into pi
+sudo mount /dev/sda1 /music/usb
+sudo /etc/init.d/mpd stop
+sudo rm /music/mp3/*
+sudo cp /music/usb/* /music/mp3/
+sudo umount /music/usb
+
+Remove the USB stick
+sudo rm /music/mpd/tag_cache
+sudo /etc/init.d/mpd start
+mpc clear
+mpc ls
+mpc ls | mpc add
+sudo /etc/init.d/mpd restart
+mpc play
+
+Plug in earphones
+You should hear audio
+
+Next try the python script:
+sudo python /home/pi/tobabp.py
+
+Insert USB stick
+the LED should flash and the USB file copy to /music/mp3/
+the LED should flash again. Remove the Stick and LED flashes again.
+Press button to start playing
+Press button again to stop
+Press & hold button to rewind to beginning.
+sudo crontab -e
+Add following line run at startup
+@reboot python /home/pi/tobabp.py &
+sudo reboot
+
+Then retest again to be sure all is well.
+
