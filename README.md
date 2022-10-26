@@ -33,7 +33,11 @@ The following software has been used:
 * only one audiobook: There will always be only one audio book on the Raspberry
 * easy audio book deployment: When you plug in a USB thumb drive with a special name/label, the Raspberry will stop playing, mount the thumb drive, deletes the old audio book, copies the new one, rebuilds the playlist and – after unplugging the thumb drive – starts the new audiobook in pause mode
 * multi format: Since it uses mpd, the player supports  Ogg Vorbis, FLAC, OggFLAC, MP2, MP3, MP4/AAC, MOD, Musepack and wave
-  
+
+![](obabp_1.jpg)
+
+![](obabp_2.jpg)
+
 If you like to build your own one button audio book player, here are the super simple schematics:
 ![](tobabp_schematics.jpg)  
   
