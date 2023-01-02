@@ -93,6 +93,7 @@ def main():
         updateLED(client)
 
         while True:
+                client.ping ()
                 device = checkForUSBDevice("1GB") # 1GB is the name of my thumb drive
                 if device != "":
                         # USB thumb drive has been inserted, new music will be copied
