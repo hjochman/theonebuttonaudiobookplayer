@@ -52,8 +52,8 @@ I just completed building this and have some addendum notes adding more details:
 Install the following packages:
 sudo apt-get install mpd
 sudo apt-get install mpc
-sudo apt-get install python-mpd
-sudo apt-get install python-pyudev
+sudo apt-get install python3-mpd
+sudo apt-get install python3-pyudev
 
 (below assumes using defaults for /etc/mpd.conf)
 sudo mkdir -p /music/usb
