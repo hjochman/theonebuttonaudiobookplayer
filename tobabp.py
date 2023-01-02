@@ -85,7 +85,7 @@ def main():
         mpdConnect(client, CON_ID)
 
         status = client.status()
-        print status
+        print (status)
 
         timebuttonisstillpressed = 0
 
@@ -100,7 +100,7 @@ def main():
                         client.disconnect()
                         loadMusic(client, CON_ID, device)
                         mpdConnect(client, CON_ID)
-                        print client.status()
+                        print (client.status())
                         flashLED(0.1, 5)
                         # wait until thumb drive is umplugged again
                         while checkForUSBDevice("1GB") == device:
