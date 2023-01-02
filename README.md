@@ -55,7 +55,18 @@ sudo apt-get install mpc
 sudo apt-get install python3-mpd
 sudo apt-get install python3-pyudev
 
-(below assumes using defaults for /etc/mpd.conf)
+config audio output
+sudo nano /etc/mpd.conf
+audio_output {
+	type		"alsa"
+	name		"My ALSA Device"
+#	device		"hw1,0"		# optional
+	mixer_type      "software"	# optional
+	mixer_device	"default"	# optional
+	mixer_control	"PCM"		# optional
+}
+
+
 sudo mkdir -p /music/usb
 sudo ln -s /var/lib/mpd /music/mpd
 sudo ln -s /var/lib/mpd/music /music/mp3
