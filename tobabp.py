@@ -109,6 +109,7 @@ def main():
                 if GPIO.input(BUTTON) == True:
                         if timebuttonisstillpressed == 0:
                                 # button has been pressed, pause or unpause now
+                                print (client.status())
                                 if client.status()["state"] == "stop":
                                         client.play()
                                 else:
