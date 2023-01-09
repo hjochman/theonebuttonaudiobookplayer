@@ -46,17 +46,30 @@ def mpdConnect(client, con_id):
         return True
 
 def loadMusic(client, con_id, device):
+        print ("0/9 mount")
         os.system("mount "+device+" /music/usb")
-        os.system("/etc/init.d/mpd stop")
-        os.system("rm /music/mp3/*")
-        os.system("cp /music/usb/* /music/mp3/")
-        os.system("umount /music/usb")
-        os.system("rm /music/mpd/tag_cache")
-        os.system("/etc/init.d/mpd start")
+        print ("0.5/9 mpc clear")
         os.system("mpc clear")
-        os.system("mpc ls | mpc add")
+        print ("1/9 mpd stop")
+        os.system("/etc/init.d/mpd stop")
+        print ("2/9 rm mp3")
+        os.system("rm /music/mp3/*")
+        print ("3/9 cp")
+        os.system("cp -v /music/usb/* /music/mp3/")
+        print ("4/9 umount")
+        os.system("umount /music/usb")
+        print ("5/9 clear tag cache")
+        os.system("rm /music/mpd/tag_cache")
+        print ("6/9 mpd start")
+        os.system("/etc/init.d/mpd start")
+        print ("7/9 mpc clear")
+        os.system("mpc clear")
+        print ("8/9 mpc add")
+        os.system("mpc ls | sort | mpc add")
+        print ("9/9 mpd restart")
         os.system("/etc/init.d/mpd restart")
-
+        print ("*** done ****")
+#
 def flashLED(speed, time):
         for x in range(0, time):
                 GPIO.output(LED, GPIO.LOW)
@@ -75,6 +88,7 @@ def checkForUSBDevice(name):
         res = ""
         context = pyudev.Context()
         for device in context.list_devices(subsystem='block', DEVTYPE='partition'):
+#                print (device.get('ID_FS_LABEL'))
                 if device.get('ID_FS_LABEL') == name:
                         res = device.device_node
         return res
@@ -110,8 +124,8 @@ def main():
                 if GPIO.input(BUTTON) == True:
                         if timebuttonisstillpressed == 0:
                                 # button has been pressed, pause or unpause now
-                                print (client.status())
                                 if client.status()["state"] == "stop":
+                                        client.setvol(60)
                                         client.play()
                                 else:
                                         client.pause()
